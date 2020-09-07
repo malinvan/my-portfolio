@@ -1,38 +1,58 @@
 import React from 'react';
 import './style.css';
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
-export class App extends React.Component {
-
-    state = {
-        counter: 0
-    }
-
-    componentDidMount() {
-        // Fetch information from backend
-    }
-
-    updateCounter = () => {
-        this.setState({
-            counter: this.state.counter + 1
-        });
-    }
-
-    resetCounter = () => {
-        this.setState({
-            counter: 0
-        });
-    }
-
-    render() {
-        const { counter } = this.state;
-
-        return (
+export function App() {
+    return (
+        <Router>
             <div>
-                <h1>This is my counter</h1>
-                <p>{counter}</p>
-                <button onClick={this.updateCounter}>Update Counter</button>
-                <button onClick={this.resetCounter}>Reset Counter</button>
+                <nav>
+                    <ul>
+                        <li>
+                            <Link to="/">Home</Link>
+                        </li>
+                        <li>
+                            <Link to="/my_portfolio">My Portfolio</Link>
+                        </li>
+                        <li>
+                            <Link to="/about">About Me</Link>
+                        </li>
+                        <li>
+                            <Link to="/contact">Contact</Link>
+                        </li>
+                    </ul>
+                </nav>
+                <Switch>
+                    <Route path="/my_portfolio">
+                        <MyPortfolio />
+                    </Route>
+                    <Route path="/about">
+                        <About />
+                    </Route>
+                    <Route path="/contact">
+                        <Contact />
+                    </Route>
+                    <Route path="/">
+                        <Home />
+                    </Route>
+                </Switch>
             </div>
-        );
-    }
+        </Router>
+    );
+}
+
+function Home() {
+    return <h2>Home</h2>;
+}
+
+function MyPortfolio() {
+    return <h2>My Portfolio</h2>;
+}
+
+function About() {
+    return <h2>About</h2>;
+}
+
+function Contact() {
+    return <h2>Contact</h2>;
 }
